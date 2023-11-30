@@ -1,0 +1,58 @@
+/* AddToCart.css */
+.add-to-cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  th {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .total-cost {
+    margin-bottom: 20px;
+  }
+  
+  .print-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+  .print-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .back-to-pharmacy-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .back-to-pharmacy-button:hover {
+    background-color: #2980b9;
+  }
+  

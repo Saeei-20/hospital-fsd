@@ -1,0 +1,61 @@
+/* Pharmacy.css */
+.pharmacy-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 8px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.medicine-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+th {
+  background-color: #3498db;
+  color: white;
+}
+
+.go-to-cart-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.go-to-cart-button:hover {
+  background-color: #2980b9;
+}
