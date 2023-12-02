@@ -21,18 +21,17 @@ const Login = () => {
       return;
     }
 
-    // Additional validation logic based on your requirements
 
     // If validation is successful, you can proceed with authentication or other actions
   };
 
   return (
     <div className="login-container">
-      <div className="user-type-buttons">
-        {/* <button className={userType === 'manager' ? 'active' : ''} onClick={() => handleUserTypeChange('manager')}>Manager</button> */}
+      {/* <div className="user-type-buttons">
+        <button className={userType === 'manager' ? 'active' : ''} onClick={() => handleUserTypeChange('manager')}>Manager</button>
         <button className={userType === 'doctor' ? 'active' : ''} onClick={() => handleUserTypeChange('doctor')}>Doctor</button>
         <button className={userType === 'pharmacy' ? 'active' : ''} onClick={() => handleUserTypeChange('pharmacy')}>Pharmacy</button>
-      </div>
+      </div> */}
 
       <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>

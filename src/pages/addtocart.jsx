@@ -1,42 +1,32 @@
 // AddToCart.jsx
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-const AddToCart = (props) => {
-  const { location } = props;
-  const { state } = location;
-  const cart = state && state.cart ? state.cart : [];
+const AddToCart = () => {
+  const location = useLocation();
+  const cart = location?.state;
 
   return (
-    <div>
-      <h2>Add to Cart</h2>
-      <table>
+    <div className="add-to-cart-container">
+      <h2>Shopping Cart</h2>
+      <table className="cart-table">
         <thead>
           <tr>
             <th>Medicine Name</th>
-            <th>Cost</th>
             <th>Quantity</th>
-            <th>Action</th>
+            <th>Cost</th>
           </tr>
         </thead>
         <tbody>
-          {cart.map((medicine) => (
-            <tr key={medicine.id}>
-              <td>{medicine.name}</td>
-              <td>{medicine.cost}</td>
-              <td>{medicine.quantity}</td>
-              <td>
-                <button onClick={() => alert('Remove from Cart')}>Remove</button>
-              </td>
+          {cart && cart?.map((item) => (
+            <tr key={item.id}>
+              <td>{item.name}</td>
+              <td>{item.quantity}</td>
+              <td>{item.cost * item.quantity}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <div>
-        <p>Total Cost: {cart.reduce((total, medicine) => total + medicine.cost * medicine.quantity, 0)}</p>
-      </div>
-
-      <button onClick={() => alert('Receipt Printed')}>Print Receipt</button>
     </div>
   );
 };

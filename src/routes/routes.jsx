@@ -2,11 +2,12 @@
 
 import Home from '../pages/Home';
 import Login from '../pages/Login';
-import Signup from '../pages/Signup';
+import Signup from '../pages/SIgnup';
 import Diagnosis from '../pages/Diagnosis';
 import newPatient from '../pages/newPatient'
 import patientRecords from "../pages/patientRecords";
 import Pharmacy from '../pages/Pharmacy';
+import AddToCart from '../pages/addtocart';
 
 
 const routes = [
@@ -40,6 +41,10 @@ const routes = [
     {
         path: '/Pharmacy',
         component: Pharmacy,
+    },
+    {
+        path: '/addToCart',
+        component: AddToCart,
     },
    
     

@@ -5,29 +5,32 @@ import './Pharmacy.css';
 
 const Pharmacy = () => {
   const [medicineList, setMedicineList] = useState([
-    { name: 'Medicine A', quantity: 10, availability: 'Y', cost: 50 },
-    { name: 'Medicine B', quantity: 5, availability: 'N', cost: 30 },
+    { name: 'Medicine A', quantity: 10, availability: 'Y', cost: 50, action: 0 },
+    { name: 'Medicine B', quantity: 5, availability: 'N', cost: 30, action: 0 },
   ]);
 
   const [cart, setCart] = useState([]);
 
-  const handleIncreaseQuantity = (index) => {
+  const handleQuantityChange = (index, change) => {
     setMedicineList((prevMedicineList) => {
       const updatedList = [...prevMedicineList];
-      updatedList[index] = { ...updatedList[index], quantity: updatedList[index].quantity + 1 };
+      const newAction = updatedList[index].action + change;
+
+      if (newAction >= 0 && updatedList[index].quantity - change >= 0) {
+        updatedList[index] = { ...updatedList[index], action: newAction, quantity: updatedList[index].quantity - change };
+      }
+
       return updatedList;
     });
   };
 
-  const handleDecreaseQuantity = (index) => {
-    if (medicineList[index].quantity > 0) {
-      setMedicineList((prevMedicineList) => {
-        const updatedList = [...prevMedicineList];
-        updatedList[index] = { ...updatedList[index], quantity: updatedList[index].quantity - 1 };
-        return updatedList;
-      });
-
-      setCart((prevCart) => [...prevCart, { ...medicineList[index], id: Date.now() }]);
+  const handleAddToCart = (index) => {
+    if (medicineList[index].action > 0) {
+      setCart((prevCart) => [
+        ...prevCart,
+        { ...medicineList[index], quantity: medicineList[index].action, id: Date.now() },
+      ]);
+      handleQuantityChange(index, medicineList[index].action);
     }
   };
 
@@ -53,8 +56,10 @@ const Pharmacy = () => {
               <td>{medicine.availability}</td>
               <td>{medicine.cost}</td>
               <td>
-                <button onClick={() => handleDecreaseQuantity(index)}>-</button>
-                <button onClick={() => handleIncreaseQuantity(index)}>+</button>
+                <button onClick={() => handleQuantityChange(index, 1)}>+</button>
+                {medicine.action}
+                <button onClick={() => handleQuantityChange(index, -1)}>-</button>
+                <button onClick={() => handleAddToCart(index)}>Add to Cart</button>
               </td>
             </tr>
           ))}
