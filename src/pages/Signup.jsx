@@ -1,7 +1,7 @@
 // Signup.jsx
 import React, { useState } from 'react';
 import './Signup.css';
-
+import{ Link , useNavigate} from 'react-router-dom'
 const Signup = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
@@ -13,25 +13,23 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Add your signup logic here
-    // You can use the form data to send to your server or handle signup in your preferred way
-  
+
     // Example validation (you may want to add more robust validation)
     if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
       return;
     }
-  
+
     if (!name || !gender || !dob || !contactNumber || !email || !username || !password || !confirmPassword) {
       setErrorMessage('Please fill out all fields');
       return;
     }
-  
+
     try {
-      const response = await fetch('http://localhost:4000/api/signup', {
+      const response = await fetch('http://localhost:4000/signUp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,12 +45,13 @@ const Signup = () => {
           confirmPassword,
         }),
       });
-  
+
       if (response.ok) {
         setErrorMessage('');
-  
+
         alert('Data submitted successfully!');
-  
+        navigate('/Login')
+
         // Clear form fields
         setName('');
         setGender('');
@@ -70,17 +69,14 @@ const Signup = () => {
       console.error('Error submitting the form:', error);
       setErrorMessage('Internal Server Error');
     }
-  
-  
-    // Additional validation and signup logic...
 
-    // If validation is successful, you can proceed with signup
-    setErrorMessage(''); // Clear error message on successful submission
+    setErrorMessage('');
   };
+
 
   return (
     <div className="signup-container">
-      {/* <h2>Sign Up</h2> */}
+   
       <h2>Sign up for Doctor/ Pharmacist</h2>
 
       <form className="signup-form" onSubmit={handleSubmit}>
@@ -103,12 +99,7 @@ const Signup = () => {
 
         <label htmlFor="username">Username:</label>
         <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-{/* 
-        <label htmlFor="photo">Upload Photo:</label>
-        <input type="file" id="photo" accept="image/*" onChange={(e) => setPhoto(e.target.files[0])} />
 
-        <label htmlFor="idProof">Upload ID Proof:</label>
-        <input type="file" id="idProof" accept="image/*" onChange={(e) => setIdProof(e.target.files[0])} /> */}
 
         <label htmlFor="password">Enter Password:</label>
         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />

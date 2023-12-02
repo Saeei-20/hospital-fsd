@@ -2,7 +2,7 @@
 
 import Home from '../pages/Home';
 import Login from '../pages/Login';
-import Signup from '../pages/SIgnup';
+import Signup from '../pages/Signup';
 import Diagnosis from '../pages/Diagnosis';
 import newPatient from '../pages/newPatient'
 import patientRecords from "../pages/patientRecords";
