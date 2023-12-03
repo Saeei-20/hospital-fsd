@@ -1,6 +1,6 @@
 // Login.jsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link ,useNavigate} from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -8,22 +8,42 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const navigate= useNavigate()
   const handleUserTypeChange = (type) => {
     setUserType(type);
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!username || !password) {
       setErrorMessage('Please enter both username and password');
       return;
     }
-
-
-    // If validation is successful, you can proceed with authentication or other actions
+  
+    try {
+      const response = await fetch('http://localhost:4000/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Include credentials in the request
+        body: JSON.stringify({ username, password }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        navigate('/'); 
+     
+      } else {
+        const errorData = await response.json();
+        console.log(errorData);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
+  
 
   return (
     <div className="login-container">

@@ -1,18 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const signUpSchema = new mongoose.Schema({
-    name: String,
-    gender: String,
-    dob: Date,
-    contactNumber: String,
-    email: String,
-    username: String,
-    password: String,
-    confirmPassword: {
-      type: String,
-      required: true
-    }
-  });
-  
+  name: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  gender: { type: String, required: true }, // 'string' should be 'String'
+  dob: { type: Date, required: true }, // 'date' should be 'Date'
+  username: { type: String, unique: true }, // 'string' should be 'String'
+  password: { type: String, required: true },
+  confirmPassword: { type: String, required: true },
+  contactNumber: { type: Number, required: true } // 'number' should be 'Number'
+});
 
-module.exports = mongoose.model("Signup", signUpSchema);
+const signUpModel = mongoose.model("Signup", signUpSchema);
+module.exports = signUpModel;
