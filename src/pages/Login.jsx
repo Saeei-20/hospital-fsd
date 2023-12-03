@@ -1,6 +1,6 @@
 // Login.jsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link ,useNavigate} from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const navigate= useNavigate()
   const handleUserTypeChange = (type) => {
     setUserType(type);
   };
@@ -33,6 +33,8 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        navigate('/'); 
+     
       } else {
         const errorData = await response.json();
         console.log(errorData);
