@@ -44,8 +44,6 @@ const NewPatient = () => {
       return;
     }
 
-
-
     try {
       const response = await fetch('http://localhost:4000/api/user/addUser', {
           method: 'POST',
@@ -68,8 +66,6 @@ const NewPatient = () => {
           setErrorMessage(''); 
           alert("Data submitted succesfully")
 
-
-
           setName('');
           setAge('');
           setGender('');
@@ -90,11 +86,6 @@ const NewPatient = () => {
       setErrorMessage('Internal Server Error');
   }
 
-
-
-    // Additional validation and logic...
-
-    // If validation is successful, you can proceed with adding a new patient
     setErrorMessage(''); // Clear error message on successful submission
   };
 

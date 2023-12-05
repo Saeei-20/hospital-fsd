@@ -17,7 +17,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Example validation (you may want to add more robust validation)
     if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
       return;

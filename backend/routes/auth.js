@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
       return res.status(400).send({ message: "Invalid username or password" }); // Changed status code to 400 for consistency
     }
 
-    // Add logic here for successful login if needed
+    
 
     res.status(200).send({ message: "Login successful" }); // Changed status code to 200 for consistency
 

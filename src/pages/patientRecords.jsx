@@ -40,9 +40,7 @@ const patientRecords = () => {
   const handleFilter = () => {
 
 
-
-    // Implement filter functionality based on symptoms
-    // For now, it filters records that include the filter term in symptoms
+    // Filter functionality filters records that include the filter term in symptoms
     const result = patientRecords.filter(record => record.symptoms.toLowerCase().includes(filterTerm.toLowerCase()));
     setPatientRecords(result);
   };
@@ -62,7 +60,7 @@ const patientRecords = () => {
             <th>Age</th>
             <th>Blood Group</th>
             <th>Symptoms</th>
-            <th>Test Result</th>
+            <th>Past Medical Issues</th>
             <th>Contact No</th>
             {/* <th>Bill Amount</th> */}
           </tr>
