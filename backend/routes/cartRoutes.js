@@ -15,7 +15,6 @@ router.get('/getCart', async (req, res) => {
 });
 
 
-
   router.post('/addCart', async (req, res) => {
     try {
         console.log(req.body)

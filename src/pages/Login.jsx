@@ -33,7 +33,9 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        navigate('/'); 
+        alert('Logged in successfully!');
+        navigate('/');
+        //navigate('/'); 
      
       } else {
         const errorData = await response.json();
@@ -47,11 +49,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* <div className="user-type-buttons">
-        <button className={userType === 'manager' ? 'active' : ''} onClick={() => handleUserTypeChange('manager')}>Manager</button>
-        <button className={userType === 'doctor' ? 'active' : ''} onClick={() => handleUserTypeChange('doctor')}>Doctor</button>
-        <button className={userType === 'pharmacy' ? 'active' : ''} onClick={() => handleUserTypeChange('pharmacy')}>Pharmacy</button>
-      </div> */}
+      <h2>Log in</h2>
 
       <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>

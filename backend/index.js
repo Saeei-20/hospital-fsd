@@ -21,7 +21,7 @@ app.use(cors({
   credentials: true
 }));
 
-// ~ ***************    ADMIN + USER      ***************
+
 app.use("/api/user", userRoutes);
 app.use("/api/user", cartRoutes);
 /* app.use("/api/signup", signUpRoutes) */
