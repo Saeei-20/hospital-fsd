@@ -5,11 +5,12 @@ const cors = require("cors");
 const bcrypt = require('bcrypt');
 const dbConnection = require("./dbConnection");
 const userRoutes = require("./routes/userRoutes");
-const cartRoutes = require("./routes/cartRoutes");
+//const cartRoutes = require("./routes/cartRoutes");
 //const signUpRoutes = require("./routes/signupRoutes");
 const signUpModel = require("./models/signup")
+const medicinesModel = require ("./models/medicines")
 const dotenv = require("dotenv");
-
+const cartModel = require("./models/cart")
 dotenv.config({ path: "config.env" });
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -23,7 +24,7 @@ app.use(cors({
 
 // ~ ***************    ADMIN + USER      ***************
 app.use("/api/user", userRoutes);
-app.use("/api/user", cartRoutes);
+
 /* app.use("/api/signup", signUpRoutes) */
 app.post('/signUp', async (req, res) => {
   const { name, email, password, username, contactNumber, gender, dob, confirmPassword } = req.body;
@@ -73,6 +74,48 @@ app.post('/Login', async (req, res) => {
     }
   })
 
+});
+
+app.get('/api/medicines', async (req, res) => {
+  try {
+    const medicines = await medicinesModel.find();
+    res.json(medicines);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Assuming you have a route like '/addToCart' in your Express server
+app.post('/addToCart', async (req, res) => {
+  try {
+    const { name, price, quantity } = req.body;
+
+    // Validate if name, price, and quantity are present in the request
+    if (!name || !price || !quantity) {
+      return res.status(400).json({ error: 'Name, price, and quantity are required.' });
+    }
+
+    // Create a new cart item
+    const cartItem = new cartModel({ name, price, quantity });
+
+    // Save the cart item to the database
+    await cartItem.save();
+
+    res.status(201).json({ message: 'Item added to the cart successfully.' });
+  } catch (error) {
+    console.error('Error adding item to cart:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.get('/cartItems', async (req, res) => {
+  try {
+    const cartItems = await cartModel.find();
+    res.json(cartItems);
+  } catch (error) {
+    console.error('Error fetching cart items:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 
