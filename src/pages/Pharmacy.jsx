@@ -56,9 +56,13 @@ const handleAddToCart = async (id, quantity) => {
     });
 
     const data = await response.json();
-    console.log(data.message); // Log the server response
-
-    // You may also want to update your UI to reflect that the item has been added to the cart
+    if (data.success) {
+      // Display a success alert
+      alert(data.message);
+    } else {
+      // Display an error alert
+      alert(data.error);
+    }
   } catch (error) {
     console.error('Error adding item to cart:', error);
   }

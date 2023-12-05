@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors({
   origin: ["http://localhost:5173"],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST" ,"DELETE"],
   credentials: true
 }));
 
@@ -101,12 +101,15 @@ app.post('/addToCart', async (req, res) => {
     // Save the cart item to the database
     await cartItem.save();
 
-    res.status(201).json({ message: 'Item added to the cart successfully.' });
+    // Send a success message to the client
+    res.status(201).json({ success: true, message: 'Item added to the cart successfully.' });
   } catch (error) {
     console.error('Error adding item to cart:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    // Send an error message to the client
+    res.status(500).json({ success: false, error: 'Internal server error' });
   }
 });
+
 
 app.get('/cartItems', async (req, res) => {
   try {
@@ -117,6 +120,25 @@ app.get('/cartItems', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+app.delete('/cartItems/:id', async (req, res) => {
+  try {
+    const itemId = req.params.id;
+
+    // Validate if itemId is present in the request
+    if (!itemId) {
+      return res.status(400).json({ error: 'Item ID is required.' });
+    }
+
+    // Delete the cart item from the database
+    await cartModel.findByIdAndDelete(itemId);
+
+    res.status(200).json({ message: 'Medicine deleted from the cart successfully.' });
+  } catch (error) {
+    console.error('Error deleting medicine from cart:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+})
 
 
 dbConnection();
